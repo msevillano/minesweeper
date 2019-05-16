@@ -1,0 +1,20 @@
+service: minesweeper
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 4000
+
+functions:
+  status:
+    handler: src/public/system.getStatus
+    events:
+      - http:
+          path: /status
+          method: get

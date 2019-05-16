@@ -1,0 +1,26 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "mine sweeper API",
+  "main": "",
+  "scripts": {
+    "start": "serverless offline start --skipCacheInvalidation",
+    "test": "jest --coverage",
+    "lint": "eslint --fix **/*.js"
+  },
+  "keywords": [],
+  "author": "Mauro Sevillano",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "mongoose": "^5.5.8",
+    "serverless": "^1.42.2"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-google": "^0.13.0",
+    "jest": "^24.8.0",
+    "jsdoc": "^3.6.2",
+    "serverless-offline": "^4.10.0"
+  }
+}

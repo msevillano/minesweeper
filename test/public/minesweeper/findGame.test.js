@@ -3,6 +3,10 @@
 const findGame = require('../../../src/public/minesweeper/findGame');
 const MineSweeper = require('../../../src/models/minesweeper');
 
+beforeAll(() => {
+  process.env.MONGODB = 'mongodb://localhost:27017/test';
+});
+
 test('it should give a 4xx response', async () => {
   const event = {
     pathParameters: {

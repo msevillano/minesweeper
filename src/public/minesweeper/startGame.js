@@ -4,11 +4,9 @@ const MineSweeper = require('../../models/minesweeper');
 const dbConnector = require('../../utils/db/connectToDb');
 const errorParser = require('../../utils/error/errorParser');
 
-const dbConn = dbConnector('mongodb://localhost:27017/development');
-
 module.exports.start = async (event) => {
   try {
-    await dbConn;
+    await dbConnector(process.env.MONGODB);
     const body = JSON.parse(event.body);
 
     const game = await MineSweeper.create({

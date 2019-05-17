@@ -4,13 +4,10 @@ const MineSweeper = require('../../models/minesweeper');
 const dbConnector = require('../../utils/db/connectToDb');
 const errorParser = require('../../utils/error/errorParser');
 
-const dbConn = dbConnector('mongodb://localhost:27017/development');
-
 module.exports.reveal = async (event) => {
   try {
-    await dbConn;
+    await dbConnector(process.env.MONGODB);
     const body = JSON.parse(event.body);
-    console.log(body);
     const game = await MineSweeper.findById(event.pathParameters.id);
     if (!game) throw new Error('Game not found');
     const updatedCells = game.revealCell(body.position);
@@ -28,6 +25,10 @@ module.exports.reveal = async (event) => {
         y: cell.y,
         status: cell.status,
       };
+    });
+    boardStatus.forEach((cell) => {
+      delete cell.bomb;
+      if (cell.status !== 4) delete cell.bombCount;
     });
     return {
       statusCode: 200,
@@ -47,7 +48,7 @@ module.exports.reveal = async (event) => {
 
 module.exports.asBomb = async (event) => {
   try {
-    await dbConn;
+    await dbConnector(process.env.MONGODB);
     const body = JSON.parse(event.body);
 
     const game = await MineSweeper.findById(event.pathParameters.id);
@@ -94,7 +95,7 @@ module.exports.asBomb = async (event) => {
 
 module.exports.asQuestion = async (event) => {
   try {
-    await dbConn;
+    await dbConnector(process.env.MONGODB);
     const body = JSON.parse(event.body);
 
     const game = await MineSweeper.findById(event.pathParameters.id);

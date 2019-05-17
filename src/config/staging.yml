@@ -1,0 +1,4 @@
+ENV: 'staging'
+
+#Database
+MONGODB: '${ssm:/hydra/staging/MONGO}'

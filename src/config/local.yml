@@ -1,0 +1,4 @@
+ENV: 'local'
+
+#Database
+MONGODB: 'mongodb://localhost:27017/development'

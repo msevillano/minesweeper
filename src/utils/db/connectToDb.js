@@ -13,11 +13,11 @@ let dbConn = null;
  */
 module.exports = async (dbURI) => {
   if (dbConn) {
-    console.log('=> using existing database connection');
+    // console.log('=> using existing database connection');
     return dbConn;
   }
 
-  console.log('=> using new database connection');
+  // console.log('=> using new database connection');
   try {
     dbConn = await mongoose.connect(dbURI);
     return dbConn;

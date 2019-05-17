@@ -3,6 +3,9 @@ service: minesweeper
 provider:
   name: aws
   runtime: nodejs8.10
+  region: ${opt:region, 'us-east-1'}
+  stage: ${opt:stage, 'local'}
+  environment: ${file(./src/config/${self:provider.stage}.yml)}
 
 plugins:
   - serverless-offline

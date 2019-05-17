@@ -4,7 +4,7 @@ const cellStatuses = Cell.cellStatuses;
 
 const connect = require('../../../src/utils/db/connectToDb');
 
-beforeAll(() => connect('mongodb://localhost:27017/index'));
+beforeAll(() => connect('mongodb://localhost:27017/test'));
 
 test('.changeStatus(): it should throw when an wrong state given',
     async () => {

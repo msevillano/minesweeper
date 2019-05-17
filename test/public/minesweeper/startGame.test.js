@@ -2,6 +2,10 @@
 
 const startGame = require('../../../src/public/minesweeper/startGame');
 
+beforeAll(() => {
+  process.env.MONGODB = 'mongodb://localhost:27017/test';
+});
+
 test('it should give a 4xx response', async () => {
   const event = {
     body: JSON.stringify({

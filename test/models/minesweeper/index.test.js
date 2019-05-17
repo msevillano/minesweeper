@@ -8,7 +8,7 @@ const cellStatuses = require('../../../src/models/minesweeper/cell')
     .cellStatuses;
 const connect = require('../../../src/utils/db/connectToDb');
 
-beforeAll(() => connect('mongodb://localhost:27017/test'));
+beforeAll(() => connect('mongodb://localhost:27017/tests'));
 afterAll(() => mongoose.disconnect());
 
 test('.startGame(): it should throw if missing parameters', async () => {

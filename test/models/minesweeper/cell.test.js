@@ -1,10 +1,10 @@
 'use strict';
-const Cell = require('../../src/minesweeper/cell');
+const Cell = require('../../../src/models/minesweeper/cell');
 const cellStatuses = Cell.cellStatuses;
 
-const connect = require('../../src/db/connectToDb');
+const connect = require('../../../src/utils/db/connectToDb');
 
-beforeAll(() => connect('mongodb://localhost:27017/development'));
+beforeAll(() => connect('mongodb://localhost:27017/index'));
 
 test('.changeStatus(): it should throw when an wrong state given',
     async () => {

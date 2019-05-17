@@ -1,11 +1,12 @@
 'use strict';
 
-const Board = require('../../src/minesweeper/board');
-const cellStatuses = require('../../src/minesweeper/cell').cellStatuses;
+const Board = require('../../../src/models/minesweeper/board');
+const cellStatuses = require('../../../src/models/minesweeper/cell')
+    .cellStatuses;
 
-const connect = require('../../src/db/connectToDb');
+const connect = require('../../../src/utils/db/connectToDb');
 
-beforeAll(() => connect('mongodb://localhost:27017/development'));
+beforeAll(() => connect('mongodb://localhost:27017/test'));
 
 test('.constructor(): should create a board',
     async () => {

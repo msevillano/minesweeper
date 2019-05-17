@@ -2,12 +2,13 @@
 
 const mongoose = require('mongoose');
 
-const MineSweeper = require('../../src/minesweeper');
-const Board = require('../../src/minesweeper/board');
-const cellStatuses = require('../../src/minesweeper/cell').cellStatuses;
-const connect = require('../../src/db/connectToDb');
+const MineSweeper = require('../../../src/models/minesweeper');
+const Board = require('../../../src/models/minesweeper/board');
+const cellStatuses = require('../../../src/models/minesweeper/cell')
+    .cellStatuses;
+const connect = require('../../../src/utils/db/connectToDb');
 
-beforeAll(() => connect('mongodb://localhost:27017/development'));
+beforeAll(() => connect('mongodb://localhost:27017/test'));
 afterAll(() => mongoose.disconnect());
 
 test('.startGame(): it should throw if missing parameters', async () => {

@@ -18,3 +18,33 @@ functions:
       - http:
           path: /status
           method: get
+  startGame:
+    handler: src/public/minesweeper/startGame.start
+    events:
+      - http:
+          path: /minesweeper/start
+          method: post
+  findGame:
+    handler: src/public/minesweeper/findGame.find
+    events:
+      - http:
+          path: /minesweeper/find/{id}
+          method: get
+  reveal:
+    handler: src/public/minesweeper/markCell.reveal
+    events:
+      - http:
+          path: /minesweeper/update/{id}/reveal
+          method: post
+  markBomb:
+    handler: src/public/minesweeper/markCell.asBomb
+    events:
+      - http:
+          path: /minesweeper/update/{id}/bomb
+          method: post
+  markQuestion:
+    handler: src/public/minesweeper/markCell.asQuestion
+    events:
+      - http:
+          path: /minesweeper/update/{id}/question
+          method: post

@@ -11,7 +11,7 @@ let dbConn = null;
  *
  * @param {string} dbURI - form cellStatuses enum.
  */
-module.exports.connectToDatabase = async (dbURI) => {
+module.exports = async (dbURI) => {
   if (dbConn) {
     console.log('=> using existing database connection');
     return dbConn;
@@ -23,5 +23,7 @@ module.exports.connectToDatabase = async (dbURI) => {
     return dbConn;
   } catch (e) {
     console.log(e);
+    throw new Error(`Service unavailable error:
+       can't make a connection to DB`);
   }
 };

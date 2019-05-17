@@ -1,5 +1,7 @@
 'use strict';
 
+const mongoose = require('mongoose');
+
 const cellStatuses = {
   'HIDDEN': 1,
   'QUESTION': 2,
@@ -7,41 +9,38 @@ const cellStatuses = {
   'REVEALED': 4,
 };
 
+const cellSchema = new mongoose.Schema({
+  x: Number,
+  y: Number,
+  bomb: Boolean,
+  bombCount: {
+    type: Number,
+    default: 0,
+  },
+  status: {
+    type: Number,
+    default: 1,
+  },
+});
+
 /**
- * Represents a mineSweeper board (care it might have a bomb in it).
+ * this method change the status of a cell
+ *
+ *  @throws {error} if don't recognizes the status given.
+ *
+ * @param {string} status - form cellStatuses enum.
+ * @return {Object.<{isBomb: boolean, bombsInNeighborhood: boolean}>}
  */
-class Cell {
-  /**
-   * @constructor
-   * @param {boolean} bomb - if it has a bomb.
-   * @param {Object.<{x: int, y: int}>} position - positions of cell
-   */
-  constructor(bomb, position) {
-    this.x = position.x;
-    this.y = position.y;
-    this.bomb = bomb;
-    this.bombCount = 0;
-    this.status = cellStatuses.HIDDEN;
+cellSchema.methods.changeStatus = function(status) {
+  if (!(status in cellStatuses)) {
+    throw new Error(`Invalid argument error: cell status not supported`);
   }
-
-  /**
-   * this method change the status of a cell
-   *
-   *  @throws {error} if don't recognizes the status given.
-   *
-   * @param {string} status - form cellStatuses enum.
-   * @return {Object.<{isBomb: boolean, bombsInNeighborhood: boolean}>}
-   */
-  changeStatus(status) {
-    if (!(status in cellStatuses)) {
-      throw new Error(`Invalid argument error: cell status not supported`);
-    }
-    if (this.status !== cellStatuses.REVEALED) {
-      this.status = cellStatuses[status];
-    }
-    return {isBomb: this.bomb, bombsInNeighborhood: this.bombCount > 0};
+  if (this.status !== cellStatuses.REVEALED) {
+    this.status = cellStatuses[status];
   }
-}
+  return {isBomb: this.bomb, bombsInNeighborhood: this.bombCount > 0};
+};
 
-module.exports = Cell;
+module.exports = mongoose.model('Cell', cellSchema);
+module.exports.schema = cellSchema;
 module.exports.cellStatuses = cellStatuses;
